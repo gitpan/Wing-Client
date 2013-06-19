@@ -6,22 +6,23 @@ build_requires: {}
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 4.300028, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: Wing-Client
 requires:
+  HTTP::CookieJar: 0.004
   HTTP::Request::Common: 0
+  HTTP::Thin: 0
   JSON: 0
-  LWP::UserAgent: 6.04
   Moo: 1.002000
   Ouch: 0.0400
   Test::Deep: 0
   Test::More: 0
   URI: 0
 resources:
-  bugtracker: http://github.com/plainblack/Wing-Client/issues
-  repository: git://github.com/plainblack/Wing-Client.git
-version: 0.0100
+  bugtracker: http://github.com/rizen/Wing-Client/issues
+  repository: git://github.com/rizen/Wing-Client.git
+version: 0.0200

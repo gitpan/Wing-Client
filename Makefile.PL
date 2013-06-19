@@ -20,35 +20,22 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Wing::Client",
   "PREREQ_PM" => {
+    "HTTP::CookieJar" => "0.004",
     "HTTP::Request::Common" => 0,
+    "HTTP::Thin" => 0,
     "JSON" => 0,
-    "LWP::UserAgent" => "6.04",
     "Moo" => "1.002000",
     "Ouch" => "0.0400",
     "Test::Deep" => 0,
     "Test::More" => 0,
     "URI" => 0
   },
-  "TEST_REQUIRES" => {},
-  "VERSION" => "0.0100",
+  "VERSION" => "0.0200",
   "test" => {
     "TESTS" => "t/*.t"
   }
 );
 
-
-unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
-  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
-  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
-  for my $mod ( keys %$tr ) {
-    if ( exists $br->{$mod} ) {
-      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
-    }
-    else {
-      $br->{$mod} = $tr->{$mod};
-    }
-  }
-}
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
   my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};

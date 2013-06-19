@@ -2,11 +2,12 @@ use strict;
 use warnings;
 package Wing::Client;
 {
-  $Wing::Client::VERSION = '0.0100';
+  $Wing::Client::VERSION = '0.0200';
 }
 
-use LWP::UserAgent;
+use HTTP::Thin;
 use HTTP::Request::Common;
+use HTTP::CookieJar::LWP;
 use JSON;
 use URI;
 use Ouch;
@@ -19,7 +20,7 @@ Wing::Client - A simple client to Wing's web services.
 
 =head1 VERSION
 
-version 0.0100
+version 0.0200
 
 =head1 SYNOPSIS
 
@@ -69,6 +70,27 @@ has uri => (
     is          => 'rw',
     required    => 1,
 );
+
+=item agent
+
+A LWP::UserAgent object used to keep a persistent cookie_jar across requests.
+
+=back
+
+=back
+
+=cut
+
+has agent => (
+    is          => 'ro',
+    required    => 0,
+    lazy        => 1,
+    builder     => '_build_agent',
+);
+
+sub _build_agent {
+    return HTTP::Thin->new( cookie_jar => HTTP::CookieJar::LWP->new(), );
+}
 
 =head2 get(path, params)
 
@@ -178,7 +200,7 @@ sub _create_uri {
 
 sub _process_request {
     my $self = shift;
-    $self->_process_response(LWP::UserAgent->new->request( @_ ));
+    $self->_process_response($self->agent->request( @_ ));
 }
 
 sub _process_response {
@@ -198,9 +220,10 @@ sub _process_response {
 
 =head1 PREREQS
 
-L<LWP::UserAgent>
+L<HTTP::Thin>
 L<Ouch>
 L<HTTP::Request::Common>
+L<HTTP::CookieJar::LWP>
 L<JSON>
 L<URI>
 L<Moo>
@@ -211,11 +234,11 @@ L<Moo>
 
 =item Repository
 
-L<http://github.com/plainblack/Wing-Client>
+L<http://github.com/rizen/Wing-Client>
 
 =item Bug Reports
 
-L<http://github.com/plainblack/Wing-Client/issues>
+L<http://github.com/rizen/Wing-Client/issues>
 
 =back
 

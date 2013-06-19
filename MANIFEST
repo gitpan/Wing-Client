@@ -5,9 +5,11 @@ META.yml
 Makefile.PL
 README
 dist.ini
+foo
 lib/Wing/Client.pm
 lib/Wing/Cookbook.pod
 t/01_usage.t
+t/02_tracers.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/upload.txt
