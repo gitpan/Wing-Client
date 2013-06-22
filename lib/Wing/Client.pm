@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Wing::Client;
 {
-  $Wing::Client::VERSION = '0.0300';
+  $Wing::Client::VERSION = '0.0400';
 }
 
 use HTTP::Thin;
@@ -20,7 +20,7 @@ Wing::Client - A simple client to Wing's web services.
 
 =head1 VERSION
 
-version 0.0300
+version 0.0400
 
 =head1 SYNOPSIS
 
@@ -162,8 +162,7 @@ A hash reference of parameters you wish to pass to the web service.
 sub put {
     my ($self, $path, $params) = @_;
     my $uri = $self->_create_uri($path);
-    my $request = POST $uri->as_string, 'X-HTTP-Method' => 'PUT', Content_Type => 'form-data', Content => $params ;
-    return $self->_process_request($request);
+    return $self->_process_request( POST $uri->as_string, 'X-HTTP-Method' => 'PUT', Content_Type => 'form-data', Content => $params,);
 }
 
 =head2 post(path, params)
