@@ -5,7 +5,6 @@ META.yml
 Makefile.PL
 README
 dist.ini
-foo
 lib/Wing/Client.pm
 lib/Wing/Cookbook.pod
 t/01_usage.t

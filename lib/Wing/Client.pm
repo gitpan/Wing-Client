@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Wing::Client;
 {
-  $Wing::Client::VERSION = '0.0400';
+  $Wing::Client::VERSION = '0.0401';
 }
 
 use HTTP::Thin;
@@ -20,7 +20,7 @@ Wing::Client - A simple client to Wing's web services.
 
 =head1 VERSION
 
-version 0.0400
+version 0.0401
 
 =head1 SYNOPSIS
 
@@ -89,7 +89,7 @@ has agent => (
 );
 
 sub _build_agent {
-    return HTTP::Thin->new( cookie_jar => HTTP::CookieJar->new(), );
+    return HTTP::Thin->new( cookie_jar => HTTP::CookieJar->new() )
 }
 
 =head2 get(path, params)
